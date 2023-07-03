@@ -25,6 +25,9 @@ import { MatchingchatService } from './matchingchat/matchingchat.service';
 import { AssessmentController } from './assessment/assessment.controller';
 import { AssessmentService } from './assessment/assessment.service';
 
+import { MailboxController } from './malibox/mailbox.controller';
+import { MailboxService } from './mailbox/mailbox.service'
+
 @Module({
   imports: [
     JwtModule.register({
@@ -41,7 +44,7 @@ import { AssessmentService } from './assessment/assessment.service';
     LikeuserModule,
 
   ],
-  controllers: [AppController,UserController,LoginUserController,UpdateuserController, SexuserController, MatchingchatController, AssessmentController],
-  providers: [AppService,CreateUser,PrismaService,LoginUserService,EncryptionService, UpdateuserService, SexuserService, SeeuserResolver, MatchingchatResolver, MatchingchatService, AssessmentService],
+  controllers: [AppController,UserController,LoginUserController,UpdateuserController, SexuserController, MatchingchatController, AssessmentController, MailboxController],
+  providers: [MailboxService ,AppService,CreateUser,PrismaService,LoginUserService,EncryptionService, UpdateuserService, SexuserService, SeeuserResolver, MatchingchatResolver, MatchingchatService, AssessmentService],
 })
 export class AppModule {}

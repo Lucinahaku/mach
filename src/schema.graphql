@@ -41,3 +41,4 @@ type Mutation {
 type Subscription {
   messageSent: MatchingChatInput!
 }
+

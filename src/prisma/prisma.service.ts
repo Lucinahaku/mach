@@ -4,6 +4,7 @@ import { PrismaClient, EqualUser, Sex, Matching, Talk, Assessment } from '@prism
 @Injectable()
 export class PrismaService {
   public readonly prisma: PrismaClient;
+  mailbox: any;
 
   constructor() {
     this.prisma = new PrismaClient();

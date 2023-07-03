@@ -31,6 +31,9 @@ model EqualUser {
   Matching_Matching_opponent_User_ID Matching[] @relation("Matching_Matching_opponent_User_ID")
   Talk_User_ID        Talk[] @relation("Talk_User_ID")
   Assessment_User_ID        Assessment[] @relation("Assessment_User_ID")
+  Community_Community_User_ID   Community_User[] @relation("Community_User_ID")
+  Space_User_ID   Space[] @relation("Space_User_ID")
+  mailboxes Mailbox[]
 }
 
 model Key {
@@ -80,5 +83,50 @@ model Assessment {
   Matching                       Matching @relation(fields: [Matching_ID], references: [Matching_ID])
 
 }
+model Category {
+  Category_ID        Int      @id @default(autoincrement())
+  Category_Content   String   
+  Spaces             Space[]
+}
+model Community_User {
+  User_ID           Int      @id
+  User_Name         String
+  Icon              String?
+  Spesialist_Bool   Int
+  User              EqualUser    @relation("Community_User_ID",fields: [User_ID], references: [User_ID])
+  
+}
+
+model Space {
+  Space_ID          Int           @id @default(autoincrement())
+  User_ID           Int
+  Category_ID       Int
+  Space_Reply_ID    Int?
+  Title             String
+  Space_Img         String?
+  Space_Date        DateTime
+
+  User              EqualUser  @relation("Space_User_ID", fields: [User_ID], references: [User_ID])
+  Space_Reply       Space?           @relation("Space_Reply", fields: [Space_Reply_ID], references: [Space_ID])
+  Category          Category         @relation(fields: [Category_ID], references: [Category_ID])
+  Reply_Spaces      Space[]          @relation("Space_Reply")
+
+  @@index([User_ID])
+  @@index([Category_ID])
+  @@index([Space_Reply_ID])
+}
+model Mailbox{
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  isOfficial Boolean
+  content    String
+  createdAt  DateTime @default(now())
+  User EqualUser @relation(fields: [userId], references: [User_ID])
+
+}
+
+
+
+
 
 

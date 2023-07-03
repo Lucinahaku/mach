@@ -1,0 +1,25 @@
+type Mailbox {
+  id: Int!
+  userId: Int!
+  isOfficial: Boolean!
+  content: String!
+  createdAt: DateTime!
+  user: EqualUser!
+}
+
+input CreateMailboxInput {
+  userId: Int!
+  isOfficial: Boolean!
+  content: String!
+}
+
+type Query {
+  mailboxes: [Mailbox!]!
+  mailbox(id: Int!): Mailbox
+}
+
+type Mutation {
+  createMailbox(data: CreateMailboxInput!): Mailbox!
+  updateMailbox(id: Int!, data: CreateMailboxInput!): Mailbox
+  deleteMailbox(id: Int!): Mailbox
+}
